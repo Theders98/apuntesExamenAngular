@@ -1,1 +1,21 @@
-<p>personajes works!</p>
+<table class="table">
+  <td>ID</td>
+  <td>Name</td>
+  <tr *ngFor= "let personaje of personajes">
+
+    <td>{{ personaje.id }}</td>
+    <td>{{ personaje.name }}</td>
+    <td id="hero" *ngIf= "personaje.hero == true">Yes</td>
+    <td id="villan" *ngIf= "personaje.hero == false">No, its a Libert</td>
+    <td><button (click)= "personajeActions('edit',null, personaje)" class="btn btn-outline-warning">Modificar</button></td>
+    <td><button (click)= "personajeActions('delete',personaje.id)" class="btn btn-outline-danger">Borrar</button></td>
+  </tr>
+</table>
+
+<app-ver-personajes
+*ngIf= "display"
+[personaje]= "selectedPersonaje"
+[type]= "type"
+(personajeActions)= "personajeActions($event,$event,$event)"
+>
+</app-ver-personajes>

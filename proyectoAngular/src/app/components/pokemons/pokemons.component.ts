@@ -12,41 +12,39 @@ import { PokemonsService } from 'src/app/services/pokemons.service';
 export class PokemonsComponent implements OnInit {
 
   public display: boolean = false;
+  public pokemon: pokemon;
+
+
   pokemons : pokemon [];
 
   constructor(private pokemonsService : PokemonsService) { }
-  ngOnInit() {
-    this.pokemons = this.pokemonsService.getPokemons();
+  ngOnInit() { this.pokemons = this.pokemonsService.getPokemons(); }
+
+mostrarDatos(){  }
+
+pokemonEditDisplay(pokemon) {
+  this.pokemon = pokemon;
+  this.display = true;
 }
 
-mostrarDatos(){
+nuevopokemon() {
+  this.pokemon = {
+    id: this.pokemons[this.pokemons.length - 1].id + 1,
+    name: ""
+  };
+  this.pokemonEditDisplay(this.pokemon);
 
-}
-@Input() pokemon: pokemon;
-
-@Input() type: string;
-
-@Output() crearPokemon = new EventEmitter<pokemon>();
-
-@Output() modificar = new EventEmitter<pokemon>();
-
-@Output() borrarPokemon = new EventEmitter<Number>();
-
-@Output() cerrar = new EventEmitter<pokemon>();
-
-CrearAlumno() {
-  this.crearPokemon.emit();
+  this.pokemons.push(this.pokemon);
 }
 
-ModificarAlumno(pokemon: pokemon) {
-  this.modificar.emit(pokemon);
+deletePokemon(id) {
+    this.pokemons.splice(this.pokemons.indexOf(id), 1);
+
+  this.display = false;
 }
 
-BorrarAlumno(id: number) {
-  this.borrarPokemon.emit(id);
-}
+cerrarpokemon() {
+  this.display = false;
 
-cerrarAlumno() {
-  this.cerrar.emit();
 }
 }

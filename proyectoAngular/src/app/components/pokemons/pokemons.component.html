@@ -2,12 +2,18 @@
 <table class="table">
   <th>ID</th>
   <th>Nombre</th>
-    <tr *ngFor= "let x of pokemons;">
-      <td>{{ x.id }}</td>
-      <td>{{ x.name }}</td>
-      <td><button (click)= "display=true" class="btn btn-outline-warning">Modificar</button></td>
-      <td><button class="btn btn-outline-danger">Borrar</button></td>
+    <tr *ngFor= "let pokemon of pokemons;">
+      <td contenteditable>{{ pokemon.id }}</td>
+      <td contenteditable>{{ pokemon.name }}</td>
+      <td><button (click)= "pokemonEditDisplay(pokemon)" class="btn btn-outline-warning">Modificar</button></td>
+      <td><button (click)= "deletePokemon(pokemon.id)" class="btn btn-outline-danger">Borrar</button></td>
     </tr>
-    <button class="btn btn-outline-success">Añadir</button>
+    <button (click)= "nuevopokemon()" class="btn btn-outline-success">Añadir</button>
 </table>
-<app-ver-pokemon *ngIf= "display"></app-ver-pokemon>
+<app-ver-pokemon
+ *ngIf= "display"
+ [pokemon]= "pokemon"
+ (edit)= "pokemonEditDisplay($event)"
+ (close)= "cerrarpokemon()"
+ (deletePokemon)= "deletePokemon($event)"
+ ></app-ver-pokemon>
