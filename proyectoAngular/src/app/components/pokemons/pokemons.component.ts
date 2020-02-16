@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { pokemon } from 'src/app/models/pokemon';
 import { PokemonsService } from 'src/app/services/pokemons.service';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pokemons',
@@ -10,17 +10,29 @@ import { PokemonsService } from 'src/app/services/pokemons.service';
 })
 
 export class PokemonsComponent implements OnInit {
-
+  public title: string = "My Pokemon"
+  public routeId: number;
   public display: boolean = false;
   public pokemon: pokemon;
 
 
   pokemons : pokemon [];
 
-  constructor(private pokemonsService : PokemonsService) { }
+  constructor(
+    private pokemonsService : PokemonsService,
+    private route: ActivatedRoute
+    ) {
+      setTimeout(() => {
+        this.title = `Staraptsu's Pokemons`;
+        }, 3000);
+    }
+
   ngOnInit() { this.pokemons = this.pokemonsService.getPokemons(); }
 
-mostrarDatos(){  }
+  getIdRoute(){
+    this.routeId = this.route.snapshot.params["id"];
+  }
+
 
 pokemonEditDisplay(pokemon) {
   this.pokemon = pokemon;
@@ -33,13 +45,11 @@ nuevopokemon() {
     name: ""
   };
   this.pokemonEditDisplay(this.pokemon);
-
-  this.pokemons.push(this.pokemon);
+  this.pokemonsService.nuevopokemon(this.pokemon)
 }
 
 deletePokemon(id) {
-    this.pokemons.splice(this.pokemons.indexOf(id), 1);
-
+  this.pokemonsService.deletePokemon(id);
   this.display = false;
 }
 
