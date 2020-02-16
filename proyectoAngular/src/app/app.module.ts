@@ -14,7 +14,6 @@ import { VerPokemonComponent } from './components/ver-pokemon/ver-pokemon.compon
 
 @NgModule({
   declarations: [
-
     AppComponent,
     HeaderComponent,
     ContentComponent,

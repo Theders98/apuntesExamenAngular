@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { pokemon } from 'src/app/models/pokemon';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ver-pokemon',
@@ -8,26 +9,23 @@ import { pokemon } from 'src/app/models/pokemon';
 })
 export class VerPokemonComponent implements OnInit {
 
-  constructor() { }
+  public routeID: number;
+
+  constructor( private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.routeID = this.activatedRoute.snapshot.params["id"];
   }
 
   @Input() pokemon: pokemon;
 
   @Output() edit = new EventEmitter<pokemon>();
 
-  @Output() deletePokemon = new EventEmitter<Number>();
-
   @Output() close = new EventEmitter<pokemon>();
 
 
   ModificarPokemon(pokemon: pokemon) {
     this.edit.emit(pokemon);
-  }
-
-  BorrarPokemon(id: number) {
-    this.deletePokemon.emit(id);
   }
 
   cerrarPokemon() {

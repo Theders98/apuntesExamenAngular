@@ -11,9 +11,5 @@
     <button (click)= "nuevopokemon()" class="btn btn-outline-success">Añadir</button>
 </table>
 <app-ver-pokemon
- *ngIf= "display"
- [pokemon]= "pokemon"
- (edit)= "pokemonEditDisplay($event)"
- (close)= "cerrarpokemon()"
- (deletePokemon)= "deletePokemon($event)"
- ></app-ver-pokemon>
+ *ngIf= "display" [pokemon]= "pokemon" (edit)= "pokemonEditDisplay($event)" (close)= "cerrarpokemon()">
+</app-ver-pokemon>

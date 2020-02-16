@@ -13,9 +13,10 @@ export class PokemonsService {
     return this.pokemons;
   }
 
+  getPokemon(id){
+    return this.pokemons.find(pokem => pokem.id == id);
+  }
 nuevopokemon(pokemon: pokemon) {
-
-  console.log(pokemon)
   this.pokemons.push(pokemon);
 }
 
