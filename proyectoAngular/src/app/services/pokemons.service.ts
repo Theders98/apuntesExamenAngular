@@ -9,6 +9,10 @@ export class PokemonsService {
   pokemons : pokemon[] = POKEMONS;
   constructor() { }
 
+  getPokemon(id){
+    return this.pokemons.find(pok => pok.id == id);
+  }
+
   getPokemons(){
     return this.pokemons;
   }
@@ -20,7 +24,10 @@ nuevopokemon(pokemon: pokemon) {
 }
 
 deletePokemon(id) {
-    this.pokemons.splice(this.pokemons.indexOf(id), 1);
+  console.log(id)
+    this.pokemons.splice(this.pokemons.indexOf(this.getPokemon(id)), 1);
+    console.log(this.pokemons.indexOf(id))
+
 }
 
 
