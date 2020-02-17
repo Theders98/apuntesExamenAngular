@@ -21,7 +21,7 @@ nuevopokemon(pokemon: pokemon) {
 }
 
 deletePokemon(id) {
-    this.pokemons.splice(this.pokemons.indexOf(id), 1);
+    this.pokemons.splice(this.pokemons.indexOf(this.getPokemon(id)), 1);
 }
 
 
